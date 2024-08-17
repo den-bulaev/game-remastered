@@ -12,7 +12,7 @@ export enum ERoutes {
   GREETING = "/greeting",
 }
 
-export const getRoute = (route: ERoutes) => {
+const getRoute = (route: ERoutes) => {
   return `${BASE_URL}${route}`;
 };
 
