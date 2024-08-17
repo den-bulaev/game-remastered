@@ -15,13 +15,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ mode }) => {
   if (mode === "production") {
     return {
-      // base: "/",
+      base: "https://den-bulaev-cube-game.netlify.app",
       plugins: [react()],
     };
   }
 
   return {
-    base: "/den-bulaev-cube-game.netlify.app",
+    // base: "/den-bulaev-cube-game.netlify.app",
     plugins: [react()],
 
     server: {
