@@ -1,7 +1,9 @@
 import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import AuthWrapper from "../../components/AuthWrapper";
-import { ERoutes } from "../../utils/router.utils";
+
+import { ERoutes, getRoute } from "../../utils/router.utils";
 import { UserContext } from "../../contexts";
 
 const Authorization: React.FC = () => {
@@ -21,8 +23,7 @@ const Authorization: React.FC = () => {
       if (setUser) {
         setUser((prev) => ({ ...prev, name: userName }));
       }
-      navigate(ERoutes.GREETING);
-      console.log("userName", userName);
+      navigate(getRoute(ERoutes.GREETING));
     }
   };
 

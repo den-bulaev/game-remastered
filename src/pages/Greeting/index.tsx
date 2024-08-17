@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import AuthWrapper from "../../components/AuthWrapper";
 
-import { ERoutes } from "../../utils/router.utils";
+import { ERoutes, getRoute } from "../../utils/router.utils";
 import { UserContext } from "../../contexts";
 
 const Greeting: React.FC = () => {
@@ -22,7 +22,7 @@ const Greeting: React.FC = () => {
 
       <button
         className="authorization__button button"
-        onClick={() => navigate(ERoutes.MAIN)}
+        onClick={() => navigate(getRoute(ERoutes.MAIN))}
       >
         Start Game
       </button>
