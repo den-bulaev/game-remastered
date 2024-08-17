@@ -4,7 +4,7 @@ import Authorization from "../pages/Authorization";
 import Game from "../pages/Game";
 import Greeting from "../pages/Greeting";
 
-const BASE_URL = "game-remastered";
+const BASE_URL = "/game-remastered";
 
 export enum ERoutes {
   ROOT = "/",
@@ -12,7 +12,7 @@ export enum ERoutes {
   GREETING = "/greeting",
 }
 
-const getRoute = (route: ERoutes) => {
+export const getRoute = (route: ERoutes) => {
   return `${BASE_URL}${route}`;
 };
 

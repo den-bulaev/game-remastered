@@ -7,7 +7,7 @@ import classNames from "classnames";
 import GameUnit from "../../components/GameUnit";
 
 import { getBtnColor, getMessage, getSquares, getTimerValue } from "./utils";
-import { ERoutes } from "../../utils/router.utils";
+import { ERoutes, getRoute } from "../../utils/router.utils";
 import { ISquare } from "../../components/interfaces";
 
 import logo from "../../assets/logo.svg";
@@ -56,7 +56,7 @@ const Game: React.FC = () => {
         setUser((prev) => ({ ...prev, bestResult: timer }));
       }
 
-      navigate(ERoutes.GREETING);
+      navigate(getRoute(ERoutes.GREETING));
     }
   }, [checkedFieldsTotal]);
 

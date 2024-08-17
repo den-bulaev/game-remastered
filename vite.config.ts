@@ -5,4 +5,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/game-remastered",
   plugins: [react()],
+
+  server: {
+    host: "localhost", // Change 'localhost'
+    port: 3000, // Change the port number from 5173 to 3000 or any port you prefer
+  },
 });
