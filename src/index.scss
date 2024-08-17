@@ -1,0 +1,31 @@
+@import "./styles/utils/variables";
+@import "./styles/utils/extends";
+@import "./styles/utils/mixins";
+
+@import "./styles/blocks/button.scss";
+@import "./styles/blocks/colors.scss";
+
+@import "./styles/pages/Game.scss";
+@import "./styles/pages/Authorization.scss";
+
+@import "./styles/components/AuthWrapper.scss";
+@import "./styles/components/GameUnit.scss";
+
+* {
+  font-family: Matemasie, sans-serif;
+  word-spacing: 0.5vh;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-image: url("./assets/cube-background.jpg");
+  font-size: 24px;
+  line-height: 32.4px;
+  font-weight: 400;
+  color: white;
+}
+
+p {
+  margin: 0;
+}

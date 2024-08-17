@@ -1,0 +1,19 @@
+.authorization {
+  @include rectangle;
+  background-color: $c-blue;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &__logo {
+    margin-top: 15.02vh;
+    margin-bottom: 10.96vh;
+    width: 86px;
+    height: 86px;
+  }
+
+  &__info-text {
+    margin-bottom: 3.325vh;
+    text-transform: capitalize;
+  }
+}

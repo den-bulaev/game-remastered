@@ -1,0 +1,26 @@
+.authorization__login-field {
+  @extend %small-text;
+  padding-left: 20px;
+  // margin-bottom: 31.157vh;
+  max-width: 600px;
+  width: calc(100% - 25px);
+  height: $button-height;
+  border: none;
+  border-radius: 5px;
+  font-weight: 400;
+  background-color: #eff0f0;
+  color: #595252;
+}
+
+.authorization__button {
+  background-color: #f80300;
+  margin: 0 auto 12vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 3;
+  width: 100%;
+}

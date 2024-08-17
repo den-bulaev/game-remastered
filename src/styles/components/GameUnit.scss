@@ -1,0 +1,30 @@
+.Board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px;
+  margin: 1.847vh auto 0;
+  max-width: 42.487vh; // (100vw - 30px) % 1vh    30px === parent margins(left + right)
+  width: $square-side; // 100vw - 30px
+  max-height: $square-side;
+  height: 42.487vh;
+}
+
+.Field {
+  & {
+    transition: 0.3s;
+  
+    &--checked {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

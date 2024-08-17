@@ -1,0 +1,25 @@
+.Game {
+  @include rectangle;
+  background-color: white;
+
+  &__logo {
+    margin-top: 5.788vh; // 47px % 8.12(1vh)
+    width: 50px;
+    height: 50px;
+  }
+
+  &__timer {
+    margin-top: 1.847vh; // 15px % 1vh
+    color: $c-blue;
+  }
+
+  button.Game__button-check {
+    margin-top: 6.157vh; // 50px % 1vh
+    // background-color: #787878;
+  }
+
+  button.Game__button-complete {
+    margin-top: 1.847vh; //15px % 1vh
+    background-color: #383434;
+  }
+}
