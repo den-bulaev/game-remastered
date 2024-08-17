@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/game-remastered",
+  base: "/den-bulaev-cube-game.netlify.app",
   plugins: [react()],
 
   server: {
