@@ -11,6 +11,7 @@ export enum ERoutes {
 }
 
 export const getRoute = (route: ERoutes) => {
+  console.log("route", `${import.meta.env.VITE_BASE_URL}${route}`);
   return `${import.meta.env.VITE_BASE_URL}${route}`;
 };
 
