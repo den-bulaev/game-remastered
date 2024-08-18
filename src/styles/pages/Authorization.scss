@@ -17,6 +17,13 @@
   margin: 0 auto 12vh;
 }
 
+.authorization__filler {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  flex: 1;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;

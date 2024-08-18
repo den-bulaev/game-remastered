@@ -39,7 +39,7 @@ const Authorization: React.FC = () => {
           maxLength={20}
         />
 
-        <div style={{ flex: "1" }}></div>
+        <div className="authorization__filler"></div>
 
         <button type="submit" className="authorization__button button">
           Submit

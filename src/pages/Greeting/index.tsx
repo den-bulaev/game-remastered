@@ -5,6 +5,8 @@ import AuthWrapper from "../../components/AuthWrapper";
 
 import { ERoutes, getRoute } from "../../utils/router.utils";
 import { UserContext } from "../../contexts";
+import { ELocalStorageKeys } from "../../utils/localStorageKeys";
+import { getTimerValue } from "../../utils/common.utils";
 
 const Greeting: React.FC = () => {
   const navigate = useNavigate();
@@ -12,12 +14,15 @@ const Greeting: React.FC = () => {
 
   return (
     <AuthWrapper infoText={`Greetings ${user?.name || "User"}!`}>
-      <div style={{ flex: "1", display: "flex" }}>
-        {
-          typeof user?.bestResult === "number" && (
-            <p>Your best time in this session: {`${user.bestResult}`}</p>
-          )
-        }
+      <div className="authorization__filler">
+        {typeof user?.bestResult === "number" && (
+          <>
+            <p>
+              {`Your time: ${getTimerValue(Number(localStorage.getItem(ELocalStorageKeys.TIMER)) || 0)}`}
+            </p>
+            <p>{`Your best time: ${getTimerValue(user.bestResult)}`}</p>
+          </>
+        )}
       </div>
 
       <button

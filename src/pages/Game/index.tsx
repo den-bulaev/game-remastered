@@ -6,11 +6,13 @@ import classNames from "classnames";
 
 import GameUnit from "../../components/GameUnit";
 
-import { getBtnColor, getMessage, getSquares, getTimerValue } from "./utils";
+import { getBtnColor, getMessage, getSquares } from "./utils";
 import { ERoutes, getRoute } from "../../utils/router.utils";
+import { getTimerValue } from "../../utils/common.utils";
 import { ISquare } from "../../components/interfaces";
 
 import logo from "../../assets/logo.svg";
+import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 
 const Game: React.FC = () => {
   const [squares, setSquares] = useState<ISquare[]>([]);
@@ -33,6 +35,7 @@ const Game: React.FC = () => {
     const interval = setInterval(() => {
       setTimer((prev) => {
         const timerValue = prev + 1;
+        localStorage.setItem(ELocalStorageKeys.TIMER, String(timerValue));
         return timerValue;
       });
     }, 1000);
