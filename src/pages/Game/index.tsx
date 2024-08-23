@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
 import GameUnit from "../../components/GameUnit";
-import Timer from "../../components/Timer.tsx";
+import Timer from "../../components/Timer";
 
 import { getBtnColor, getMessage, getSquares } from "./utils";
 import { ERoutes, getRoute } from "../../utils/router.utils";
