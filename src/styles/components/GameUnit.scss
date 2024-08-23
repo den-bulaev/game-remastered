@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 5px;
+  gap: 2px;
   margin: 1.847vh auto 0;
   max-width: 42.487vh; // (100vw - 30px) % 1vh    30px === parent margins(left + right)
   width: $square-side; // 100vw - 30px
