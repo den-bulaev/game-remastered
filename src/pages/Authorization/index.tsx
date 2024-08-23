@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AuthWrapper from "../../components/AuthWrapper";
 
 import { ERoutes, getRoute } from "../../utils/router.utils";
-import { UserContext } from "../../contexts";
+import { UserContext } from "../../context";
 
 const Authorization: React.FC = () => {
   const [userName, setUserName] = useState("");

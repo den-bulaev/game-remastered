@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classNames from "classnames";
@@ -10,9 +9,10 @@ import { getBtnColor, getMessage, getSquares } from "./utils";
 import { ERoutes, getRoute } from "../../utils/router.utils";
 import { getTimerValue } from "../../utils/common.utils";
 import { ISquare } from "../../components/interfaces";
+import { ELocalStorageKeys } from "../../utils/localStorageKeys";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 
 import logo from "../../assets/logo.svg";
-import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 
 const Game: React.FC = () => {
   const [squares, setSquares] = useState<ISquare[]>([]);
@@ -26,7 +26,7 @@ const Game: React.FC = () => {
   const [intervalID, setIntervalID] = useState<number | null>(null);
 
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext) || {};
+  const { user, setUser } = useGlobalContext() || {};
 
   useEffect(() => {
     const squaresData = getSquares();

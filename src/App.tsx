@@ -1,17 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./utils/router.utils";
-import { UserContext } from "./contexts";
-import { useState } from "react";
-import { IUser } from "./interfaces";
+import AppContext from "./context";
 
 function App() {
-  const [user, setUser] = useState<IUser>({ name: "" });
-
   return (
     <main>
-      <UserContext.Provider value={{ user, setUser }}>
+      <AppContext>
         <RouterProvider router={router} />
-      </UserContext.Provider>
+      </AppContext>
     </main>
   );
 }
