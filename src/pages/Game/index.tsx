@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
 import GameUnit from "../../components/GameUnit";
+import Timer from "../../components/Timer.tsx";
 
 import { getBtnColor, getMessage, getSquares } from "./utils";
 import { ERoutes, getRoute } from "../../utils/router.utils";
-import { getTimerValue } from "../../utils/common.utils";
 import { ISquare } from "../../components/interfaces";
-import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
+import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 
 import logo from "../../assets/logo.svg";
 
@@ -22,8 +22,6 @@ const Game: React.FC = () => {
   const [checkedFieldsTotal, setCheckedFieldsTotal] = useState<ISquare[]>([]);
   const [isError, setIsError] = useState(false);
   const [isRestarted, setIsRestarted] = useState(false);
-  const [timer, setTimer] = useState(0);
-  const [intervalID, setIntervalID] = useState<number | null>(null);
 
   const navigate = useNavigate();
   const { user, setUser } = useGlobalContext() || {};
@@ -31,22 +29,11 @@ const Game: React.FC = () => {
   useEffect(() => {
     const squaresData = getSquares();
     setSquares(squaresData);
-
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        const timerValue = prev + 1;
-        localStorage.setItem(ELocalStorageKeys.TIMER, String(timerValue));
-        return timerValue;
-      });
-    }, 1000);
-
-    setIntervalID(interval);
-
-    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     const checkedFieldsTotalLength = checkedFieldsTotal.length;
+    const timer = localStorage.getItem(ELocalStorageKeys.TIMER);
 
     if (
       checkedFieldsTotalLength &&
@@ -54,31 +41,27 @@ const Game: React.FC = () => {
     ) {
       if (
         setUser &&
-        (typeof user?.bestResult === "undefined" || timer < user.bestResult)
+        typeof timer === "string" &&
+        (typeof user?.bestResult === "undefined" || +timer < user.bestResult)
       ) {
-        setUser((prev) => ({ ...prev, bestResult: timer }));
+        setUser((prev) => ({ ...prev, bestResult: +timer }));
       }
 
       navigate(getRoute(ERoutes.GREETING));
     }
   }, [checkedFieldsTotal]);
 
-  if (timer === 3599 && intervalID) {
-    clearInterval(intervalID);
-  }
-
   const resetGameData = () => {
     setIsError(false);
     setCheckedFieldsTotal([]);
     setCheckedFieldsPerTurn([]);
-    setTimer(0);
   };
 
   const handleClickShuffle = () => {
     const squaresForLocalStorage = getSquares();
     resetGameData();
     setSquares(squaresForLocalStorage);
-    setIsRestarted(false);
+    setIsRestarted(true);
   };
 
   const handleClickCheck = () => {
@@ -128,7 +111,7 @@ const Game: React.FC = () => {
         Shuffle
       </button>
 
-      <div className="Game__timer">{getTimerValue(timer)}</div>
+      <Timer shouldResetTimer={isRestarted} setShouldResetTimer={setIsRestarted} />
 
       <div className="Board">
         {squares.map((square) => (
