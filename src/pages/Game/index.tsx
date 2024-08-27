@@ -37,7 +37,7 @@ const Game: React.FC = () => {
 
     if (
       checkedFieldsTotalLength &&
-      checkedFieldsTotal.length === squares.length
+      checkedFieldsTotalLength === squares.length
     ) {
       if (
         setUser &&

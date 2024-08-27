@@ -1,8 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter } from "react-router-dom";
-
-import Authorization from "../pages/Authorization";
-import Game from "../pages/Game";
-import Greeting from "../pages/Greeting";
+import { lazy } from "react";
 
 export enum ERoutes {
   ROOT = "/",
@@ -13,6 +11,10 @@ export enum ERoutes {
 export const getRoute = (route: ERoutes) => {
   return `${import.meta.env.VITE_BASE_URL}${route}`;
 };
+
+const Authorization = lazy(() => import("../pages/Authorization"));
+const Greeting = lazy(() => import("../pages/Greeting"));
+const Game = lazy(() => import("../pages/Game"));
 
 export const router = createBrowserRouter([
   {
