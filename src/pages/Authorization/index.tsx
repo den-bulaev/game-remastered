@@ -28,7 +28,7 @@ const Authorization: React.FC = () => {
   };
 
   return (
-    <AuthWrapper infoText="Enter you name">
+    <AuthWrapper infoText="Enter your name">
       <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"
