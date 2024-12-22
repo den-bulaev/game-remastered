@@ -14,7 +14,6 @@ const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", changeFullscreen);
-    document.addEventListener("visibilitychange", visibilityChange);
 
     if (!isFullscreen) {
       setIsFullscreen(!!localStorage.getItem(ELocalStorageKeys.IS_FULLSCREEN));
@@ -22,17 +21,17 @@ const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
 
     return () => {
       document.removeEventListener("fullscreenchange", changeFullscreen);
-      document.removeEventListener("visibilitychange", visibilityChange);
     };
   }, []);
 
-  const visibilityChange = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    }
-  };
-
   const changeFullscreen = () => {
+    if (!document.fullscreenElement && isFullscreen) {
+      setIsFullscreen(false);
+      localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
+
+      return;
+    }
+
     if (document.fullscreenElement) {
       setIsFullscreen(true);
       localStorage.setItem(ELocalStorageKeys.IS_FULLSCREEN, "true");
