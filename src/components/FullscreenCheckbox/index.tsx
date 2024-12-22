@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 
-interface ICustomCheckboxProps {
+interface IFullscreenCheckboxProps {
   id: string;
   labelText: string;
 }
 
-const FullscreenCheckbox: React.FC<ICustomCheckboxProps> = ({
+const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
   id,
   labelText,
 }) => {
@@ -14,6 +14,7 @@ const FullscreenCheckbox: React.FC<ICustomCheckboxProps> = ({
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", changeFullscreen);
+    document.addEventListener("visibilitychange", visibilityChange);
 
     if (!isFullscreen) {
       setIsFullscreen(!!localStorage.getItem(ELocalStorageKeys.IS_FULLSCREEN));
@@ -21,8 +22,15 @@ const FullscreenCheckbox: React.FC<ICustomCheckboxProps> = ({
 
     return () => {
       document.removeEventListener("fullscreenchange", changeFullscreen);
+      document.removeEventListener("visibilitychange", visibilityChange);
     };
   }, []);
+
+  const visibilityChange = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    }
+  };
 
   const changeFullscreen = () => {
     if (document.fullscreenElement) {
