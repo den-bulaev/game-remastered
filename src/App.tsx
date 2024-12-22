@@ -9,8 +9,29 @@ import { ELocalStorageKeys } from "./utils/localStorageKeys";
 
 function App() {
   useEffect(() => {
-    localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
+    document.addEventListener("fullscreenchange", changeFullscreen);
+    document.addEventListener("keydown", keyDownF11);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", changeFullscreen);
+      document.removeEventListener("keydown", keyDownF11);
+      localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
+    };
   }, []);
+
+  const changeFullscreen = () => {
+    if (document.fullscreenElement) {
+      localStorage.setItem(ELocalStorageKeys.IS_FULLSCREEN, "true");
+    } else {
+      localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
+    }
+  };
+
+  const keyDownF11 = (e: KeyboardEvent) => {
+    if (e.key === "F11") {
+      e.preventDefault();
+    }
+  };
 
   return (
     <main>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { ELocalStorageKeys } from "../../utils/localStorageKeys";
 
 interface IFullscreenCheckboxProps {
@@ -10,34 +10,24 @@ const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
   id,
   labelText,
 }) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
+  const checkboxRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     document.addEventListener("fullscreenchange", changeFullscreen);
-
-    if (!isFullscreen) {
-      setIsFullscreen(!!localStorage.getItem(ELocalStorageKeys.IS_FULLSCREEN));
-    }
 
     return () => {
       document.removeEventListener("fullscreenchange", changeFullscreen);
     };
   }, []);
 
-  const changeFullscreen = () => {
-    if (!document.fullscreenElement && isFullscreen) {
-      setIsFullscreen(false);
-      localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
-
-      return;
+  useEffect(() => {
+    if (checkboxRef.current) {
+      checkboxRef.current.checked = !!localStorage.getItem(ELocalStorageKeys.IS_FULLSCREEN);
     }
+  }, [checkboxRef.current]);
 
-    if (document.fullscreenElement) {
-      setIsFullscreen(true);
-      localStorage.setItem(ELocalStorageKeys.IS_FULLSCREEN, "true");
-    } else {
-      setIsFullscreen(false);
-      localStorage.removeItem(ELocalStorageKeys.IS_FULLSCREEN);
+  const changeFullscreen = () => {
+    if (!document.fullscreenElement && checkboxRef.current) {
+      checkboxRef.current.checked = false;
     }
   };
 
@@ -45,13 +35,9 @@ const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
     if (document.documentElement.requestFullscreen) {
       if (e.target.checked) {
         document.documentElement.requestFullscreen();
-        setIsFullscreen(true);
       } else {
         document
           .exitFullscreen()
-          .then(() => {
-            setIsFullscreen(false);
-          })
           .catch(() => console.error("Failed to exit fullscreen"));
       }
     }
@@ -60,9 +46,9 @@ const FullscreenCheckbox: React.FC<IFullscreenCheckboxProps> = ({
   return (
     <>
       <input
+        ref={checkboxRef}
         className="styled-checkbox"
         id={id}
-        checked={isFullscreen}
         type="checkbox"
         onChange={handleChangeIsFullscreen}
       ></input>
