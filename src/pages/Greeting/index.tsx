@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AuthWrapper from "../../components/AuthWrapper";
+import FullscreenCheckbox from "../../components/FullscreenCheckbox";
 
 import { ERoutes, getRoute } from "../../utils/router.utils";
 import { UserContext } from "../../context";
@@ -11,6 +12,10 @@ import { getTimerValue } from "../../utils/common.utils";
 const Greeting: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext) || {};
+
+  const handleClickStartGame = () => {
+    navigate(getRoute(ERoutes.MAIN));
+  };
 
   return (
     <AuthWrapper infoText={`Greetings ${user?.name || "User"}!`}>
@@ -27,9 +32,13 @@ const Greeting: React.FC = () => {
         )}
       </div>
 
+      <div className="authorization__checkbox-wrapper">
+        <FullscreenCheckbox id="screen-toggle" labelText="Fullscreen" />
+      </div>
+
       <button
         className="authorization__button button"
-        onClick={() => navigate(getRoute(ERoutes.MAIN))}
+        onClick={handleClickStartGame}
       >
         Start Game
       </button>

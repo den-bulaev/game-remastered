@@ -1,13 +1,13 @@
 .authorization__login-field {
   @extend %small-text;
   padding-left: 20px;
-  // margin-bottom: 31.157vh;
   max-width: 600px;
   width: calc(100% - 25px);
   height: $button-height;
+  font-family: "sans-serif";
+  font-weight: bold;
   border: none;
   border-radius: 5px;
-  font-weight: 400;
   background-color: #eff0f0;
   color: #595252;
 }
@@ -22,6 +22,10 @@
   flex-direction: column;
   gap: 2vh;
   flex: 1;
+}
+
+.authorization__checkbox-wrapper {
+  margin-bottom: 30px;
 }
 
 .login-form {
